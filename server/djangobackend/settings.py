@@ -34,6 +34,7 @@ ALLOWED_HOSTS = ["localhost"]
 
 INSTALLED_APPS = [
     'djangoapp.apps.DjangoappConfig',
+    'fontawesomefree',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
