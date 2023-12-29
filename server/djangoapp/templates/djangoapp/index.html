@@ -15,21 +15,35 @@
 
     <body>
     <!--Add a nav bar here -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership App</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNav">
-            <ul class="navbar-nav">
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'djangoapp:about' %}">About Us</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
-              </li>
+    <nav class="navbar navbar-light bg-light">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="{% url 'djangoapp:index' %}">Dealership App</a>
+            </div>
+            <ul class="nav navbar-right">
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'djangoapp:about' %}">About Us</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="{% url 'djangoapp:contact' %}">Contact Us</a>
+                </li>
+                {% if user.is_authenticated %}
+                <li>
+                    <a class="btn btn-link" href="#">{{ user.first_name }}({{ user.username }})</a>
+                    <a class="btn btn-link" href="#">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <form class="form-inline my-2 my-lg-0">
+                        <input class="form-control mr-sm-2" type="text" placeholder="Username" aria-label="Username">
+                        <input class="form-control mr-sm-2" type="password" placeholder="Password" aria-label="Password">
+                        <button class="btn btn-primary my-2 my-sm-0" type="submit">Login</button>
+                        <button class="btn btn-light my-2 my-sm-0" type="submit">Sign Up</button>
+                    </form>
+                </li>
+                {% endif %}
             </ul>
-          </div>
+        </div>
     </nav>
     <!--Add a dealer table here -->
 
