@@ -3,7 +3,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404, render, redirect
 # from .models import related models
-from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf
+from .models import CarDealer, CarModel
+from .restapis import get_dealers_from_cf, get_dealer_reviews_from_cf, get_request
 from django.contrib.auth import login, logout, authenticate
 from django.contrib import messages
 from datetime import datetime
@@ -125,4 +126,18 @@ def get_dealer_details(request, dealer_id):
 # Create a `add_review` view to submit a review
 # def add_review(request, dealer_id):
 # ...
+def add_review(request, dealer_id):
+    context = {}
+    if request.method == "GET":
+        url = "https://eu-de.functions.appdomain.cloud/api/v1/web/5676bf81-6094-4b70-9c74-7e46a430a9bb/dealership-package/get-dealership"
+        dealer = get_request(url, **{'dealerid': dealer_id})[0]
+        context['dealer'] = CarDealer(address=dealer["address"], city=dealer["city"], full_name=dealer["full_name"],
+                                   id=dealer["id"], lat=dealer["lat"], long=dealer["long"],
+                                   short_name=dealer["short_name"],
+                                   st=dealer["st"], zip=dealer["zip"])
+        cars = CarModel.objects.all()
+        context["cars"] = cars
+        print(cars)
+        return render(request, 'djangoapp/add_review.html', context)
+
 
