@@ -24,7 +24,7 @@ def main(param_dict):
         service.set_service_url(param_dict["COUCH_URL"])
 
     except (requests.exceptions.RequestException, ConnectionResetError) as err:
-        print("connection error")
+        print("connection error \n", err)
         return {"error": "Something went wrong on the server"}
 
     selector = {}
