@@ -1,4 +1,4 @@
-# Dealerhsips
+# Dealerships Web Application
 
 IBM Full Stack Developer Final Project
 
