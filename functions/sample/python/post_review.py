@@ -34,4 +34,3 @@ def main(param_dict):
     ).get_result()
 
     return {"body": response}
-

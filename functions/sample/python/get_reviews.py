@@ -34,4 +34,3 @@ def main(param_dict):
     reviews = service.post_find(db = "reviews", selector = selector ).get_result()["docs"]
 
     return {"body": reviews}
-
