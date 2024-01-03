@@ -22,16 +22,16 @@ def main(param_dict):
         authenticator = IAMAuthenticator(param_dict["IAM_API_KEY"])
         service = CloudantV1(authenticator=authenticator)
         service.set_service_url(param_dict["COUCH_URL"])
-        
+
     except (requests.exceptions.RequestException, ConnectionResetError) as err:
         print("connection error")
         return {"error": "Something went wrong on the server"}
-    
+
     selector = {}
     if 'dealerId' in param_dict.keys():
         selector["id"] = param_dict["dealerId"]
-    
+
     reviews = service.post_find(db = "reviews", selector = selector ).get_result()["docs"]
 
     return {"body": reviews}
- 
+
