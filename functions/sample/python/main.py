@@ -32,4 +32,5 @@ def main(param_dict):
         print("connection error")
         return {"error": err}
 
+
     return {"dbs": client.all_dbs()}
